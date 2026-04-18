@@ -1,6 +1,9 @@
 <nav class="navbar">
     <div class="container nav-flex">
-        <a href="{{ url('/') }}" class="logo">ELITE<span>DIRECT</span></a>
+        <a href="{{ url('/') }}" class="logo">
+            <img src="{{ asset('logo.jpeg') }}" alt="Devaneer Logo">
+            DEVA<span>NEER</span>
+        </a>
         <div class="nav-links">
             <a href="#" class="nav-link" data-tab="shop">Shop</a>
             <a href="#" class="nav-link" data-tab="opportunity">Opportunity</a>

@@ -1,7 +1,7 @@
 @extends('layouts.website')
 
-@section('title', 'EliteDirect | Premium Wellness | Product-Based Earnings')
-@section('meta_description', 'EliteDirect — Premium wellness products. Product-based direct selling. No ROI. No Binary. Pure earnings from real sales.')
+@section('title', 'Devaneer | Premium Wellness | Product-Based Earnings')
+@section('meta_description', 'Devaneer — Premium wellness products. Product-based direct selling. No ROI. No Binary. Pure earnings from real sales.')
 
 @section('content')
     <!-- Hero Section -->
@@ -10,7 +10,7 @@
             <div class="hero-grid">
                 <div>
                     <span class="hero-badge">✦ Product-Based Direct Selling ✦</span>
-                    <h1>Earn from<br><span style="color: #C47A3A;">Real Sales</span><br>Not from Joining</h1>
+                    <h1>Earn from<br><span style="color: #06B6D4;">Real Sales</span><br>Not from Joining</h1>
                     <p>❌ No ROI | ❌ No Binary | ❌ No Passive Income<br>✅ Only Product Sale = Your Earning</p>
                     <div style="display: flex; gap: 16px; flex-wrap: wrap;">
                         <a href="#" class="btn-primary" id="heroShopBtn"><i class="fas fa-store"></i> Shop Products</a>
@@ -23,8 +23,8 @@
                     </div>
                 </div>
                 <div style="text-align: center;">
-                    <div style="background: radial-gradient(circle, rgba(196,122,58,0.15) 0%, transparent 70%); padding: 40px;">
-                        <i class="fas fa-certificate" style="font-size: 120px; color: #C47A3A; opacity: 0.8;"></i>
+                    <div style="background: radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 70%); padding: 40px;">
+                        <i class="fas fa-certificate" style="font-size: 120px; color: #06B6D4; opacity: 0.8;"></i>
                     </div>
                 </div>
             </div>
@@ -44,35 +44,61 @@
         <div id="shopSection" class="section-content active">
             <div style="text-align: center; margin-bottom: 48px;">
                 <h2>Premium Wellness Collection</h2>
-                <p style="color: #C5C7C9;">100% natural • Lab tested • GST billing</p>
+                <p style="color: #495057;">100% natural • Lab tested • GST billing</p>
             </div>
-            <div class="product-grid" id="productGrid"></div>
+            
+            <div class="product-grid">
+                @forelse($products as $product)
+                    <div class="product-card">
+                        <a href="{{ route('product.show', $product->id) }}" class="text-decoration-none">
+                            <div class="product-image">
+                                @if($product->primaryImage)
+                                    <img src="{{ asset($product->primaryImage->image_path) }}" alt="{{ $product->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                @else
+                                    <div style="font-size: 72px;">🌿</div>
+                                @endif
+                            </div>
+                        </a>
+                        <div class="product-info">
+                            <a href="{{ route('product.show', $product->id) }}" class="text-decoration-none">
+                                <div class="product-title text-dark">{{ $product->name }}</div>
+                            </a>
+                            <div style="font-size: 12px; color: #06B6D4; font-weight: 700; margin-bottom: 5px;">BV: {{ $product->business_value }}</div>
+                            <div class="product-price text-muted small">MRP: ₹{{ number_format($product->mrp, 2) }}</div>
+                            <div class="product-mrp">₹{{ number_format($product->price, 2) }} <span class="small text-muted" style="font-size: 12px; font-weight: normal;">(DP)</span></div>
+                            <button class="add-to-cart" onclick="addToCart({{ $product->id }}, '{{ $product->name }}', {{ $product->price }})">Add to Cart</button>
+                        </div>
+                    </div>
+                @empty
+                    <div style="grid-column: 1/-1; text-align: center; padding: 50px;">
+                        <i class="fas fa-box-open" style="font-size: 48px; color: #ccc; margin-bottom: 15px;"></i>
+                        <p class="text-muted">Coming soon! New wellness products are being added.</p>
+                    </div>
+                @endforelse
+            </div>
         </div>
 
         <!-- Opportunity Section -->
         <div id="opportunitySection" class="section-content">
             <div style="text-align: center; margin-bottom: 48px;">
                 <h2>Your Business, Your Terms</h2>
-                <p style="color: #C5C7C9;">Join as Distributor • Product Purchase Only • No Joining Fee</p>
+                <p style="color: #495057;">Join as Distributor • Product Purchase Only • No Joining Fee</p>
             </div>
 
-            <!-- Entry Card -->
             <div class="income-card" style="text-align: center; margin-bottom: 40px;">
-                <div style="font-size: 14px; color: #C47A3A; text-transform: uppercase;">Distributor Activation</div>
-                <div style="font-size: 56px; font-weight: 700; color: #C47A3A; margin: 16px 0;">₹2,50,000</div>
-                <div style="color: #C5C7C9;">One-time product purchase — No hidden fees</div>
+                <div style="font-size: 14px; color: #06B6D4; text-transform: uppercase; font-weight: 700;">Distributor Activation</div>
+                <div style="font-size: 56px; font-weight: 800; color: #0891B2; margin: 16px 0;">₹2,50,000</div>
+                <div style="color: #495057;">One-time product purchase — No hidden fees</div>
             </div>
 
-            <!-- Income Structure -->
             <h2 style="font-size: 28px;">Income Structure</h2>
             <div class="income-grid">
-                <div class="income-card"><div class="income-percent">20%</div><div>Retail Profit<br><span style="font-size: 12px; color: #C5C7C9;">Biggest earning source</span></div></div>
+                <div class="income-card"><div class="income-percent">20%</div><div>Retail Profit<br><span style="font-size: 12px; color: #495057;">Biggest earning source</span></div></div>
                 <div class="income-card"><div class="income-percent">10%</div><div>Direct Sponsor Income</div></div>
                 <div class="income-card"><div class="income-percent">15%</div><div>Level Income (7 Levels)</div></div>
                 <div class="income-card"><div class="income-percent">3%</div><div>Leadership Pool</div></div>
             </div>
 
-            <!-- Level Breakup -->
             <h2 style="font-size: 28px; margin-top: 48px;">Level Income Breakup</h2>
             <div class="level-grid">
                 <div class="level-item"><div class="level-percent">5%</div><div>Level 1</div></div>
@@ -84,7 +110,6 @@
                 <div class="level-item"><div class="level-percent">1%</div><div>Level 7</div></div>
             </div>
 
-            <!-- Franchise Tiers -->
             <h2 style="font-size: 28px; margin-top: 48px;">Franchise Tiers</h2>
             <div class="franchise-grid">
                 <div class="franchise-card"><div style="font-weight: 700;">Distributor</div><div class="franchise-price">₹2.5L+</div><div style="font-size: 13px;">Retail + Level Income</div></div>
@@ -93,7 +118,6 @@
                 <div class="franchise-card"><div style="font-weight: 700;">Master Franchise</div><div class="franchise-price">₹25L</div><div style="font-size: 13px;">+5% Margin + Area Rights</div></div>
             </div>
 
-            <!-- Safety Rules -->
             <h2 style="font-size: 28px; margin-top: 48px;">Safety & Compliance</h2>
             <div class="safety-grid">
                 <div class="safety-badge"><i class="fas fa-check-circle"></i> Income only on sale</div>
@@ -103,10 +127,9 @@
                 <div class="safety-badge"><i class="fas fa-check-circle"></i> Max payout control</div>
             </div>
 
-            <!-- Example -->
             <div class="income-card" style="margin-top: 48px;">
                 <div style="font-weight: 700; margin-bottom: 16px;">Example: One Distributor Joins</div>
-                <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: flex; flex-direction: column; gap: 12px; color: #0B1C2C;">
                     <div>📦 Product DP: ₹2,50,000</div>
                     <div>💰 Direct Sponsor (10%): ₹25,000</div>
                     <div>📊 Level Income (15% total): ₹37,500 across 7 levels</div>
@@ -123,64 +146,45 @@
 
 @push('scripts')
 <script>
-    // Products
-    const products = [
-        { id: 1, name: "Immunity Gold", dp: 2500, mrp: 3250, image: "💊" },
-        { id: 2, name: "Plant Protein", dp: 1800, mrp: 2340, image: "🥤" },
-        { id: 3, name: "Omega 3", dp: 1200, mrp: 1560, image: "🐟" },
-        { id: 4, name: "Turmeric Elixir", dp: 800, mrp: 1040, image: "🌿" },
-        { id: 5, name: "Sleep Gummies", dp: 950, mrp: 1235, image: "😴" },
-        { id: 6, name: "Collagen Plus", dp: 2200, mrp: 2860, image: "✨" },
-        { id: 7, name: "Apple Cider", dp: 600, mrp: 780, image: "🍎" },
-        { id: 8, name: "Multivitamin", dp: 750, mrp: 975, image: "💪" }
-    ];
+    let cart = JSON.parse(localStorage.getItem('devaneer_cart')) || [];
 
-    let cart = [];
-
-    function renderProducts() {
-        const grid = document.getElementById("productGrid");
-        if (!grid) return;
-        grid.innerHTML = products.map(p => `
-            <div class="product-card">
-                <div class="product-image">${p.image}</div>
-                <div class="product-info">
-                    <div class="product-title">${p.name}</div>
-                    <div class="product-price">DP: ₹${p.dp}</div>
-                    <div class="product-mrp">₹${p.mrp}</div>
-                    <button class="add-to-cart" onclick="addToCart(${p.id})">Add to Cart</button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    window.addToCart = function(id) {
-        const product = products.find(p => p.id === id);
+    window.addToCart = function(id, name, price) {
         const existing = cart.find(i => i.id === id);
         if(existing) existing.quantity++;
-        else cart.push({...product, quantity: 1});
+        else cart.push({id, name, price, quantity: 1});
+        saveCart();
         updateCartUI();
-        showToast(`${product.name} added`);
+        showToast(`${name} added to cart`);
+    }
+
+    function saveCart() {
+        localStorage.setItem('devaneer_cart', JSON.stringify(cart));
     }
 
     function updateCartUI() {
         const count = cart.reduce((s,i) => s + i.quantity, 0);
-        document.getElementById("cartCount").innerText = count;
-        const total = cart.reduce((s,i) => s + (i.mrp * i.quantity), 0);
-        document.getElementById("cartTotal").innerText = `₹${total}`;
+        const countEl = document.getElementById("cartCount");
+        if(countEl) countEl.innerText = count;
+        
+        const total = cart.reduce((s,i) => s + (i.price * i.quantity), 0);
+        const totalEl = document.getElementById("cartTotal");
+        if(totalEl) totalEl.innerText = `₹${total.toLocaleString('en-IN')}`;
         
         const cartItemsDiv = document.getElementById("cartItems");
+        if(!cartItemsDiv) return;
+        
         if(cart.length === 0) {
-            cartItemsDiv.innerHTML = '<div style="text-align: center; color: #C5C7C9;">Cart is empty</div>';
+            cartItemsDiv.innerHTML = '<div style="text-align: center; color: #495057; padding: 20px;">Cart is empty</div>';
             return;
         }
         cartItemsDiv.innerHTML = cart.map(item => `
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(196,122,58,0.1);">
-                <div><strong>${item.name}</strong><br><span style="font-size: 12px;">₹${item.mrp}</span></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(6,182,212,0.1);">
+                <div><strong>${item.name}</strong><br><span style="font-size: 12px;">₹${item.price.toLocaleString('en-IN')}</span></div>
                 <div style="display: flex; align-items: center; gap: 12px;">
-                    <button onclick="updateQty(${item.id}, -1)" style="background:#3A3F45; border:none; width:28px; height:28px; border-radius:8px; color:white;">-</button>
+                    <button onclick="updateQty(${item.id}, -1)" style="background:#E9ECEF; border:none; width:28px; height:28px; border-radius:8px; color:#0B1C2C;">-</button>
                     <span>${item.quantity}</span>
-                    <button onclick="updateQty(${item.id}, 1)" style="background:#3A3F45; border:none; width:28px; height:28px; border-radius:8px; color:white;">+</button>
-                    <button onclick="removeItem(${item.id})" style="background:#8A4F2A; border:none; width:28px; height:28px; border-radius:8px;">✕</button>
+                    <button onclick="updateQty(${item.id}, 1)" style="background:#E9ECEF; border:none; width:28px; height:28px; border-radius:8px; color:#0B1C2C;">+</button>
+                    <button onclick="removeItem(${item.id})" style="background:#0891B2; border:none; width:28px; height:28px; border-radius:8px; color:white;">✕</button>
                 </div>
             </div>
         `).join('');
@@ -191,75 +195,105 @@
         if(item) {
             item.quantity += delta;
             if(item.quantity <= 0) cart = cart.filter(i => i.id !== id);
+            saveCart();
             updateCartUI();
         }
     }
 
     window.removeItem = function(id) {
         cart = cart.filter(i => i.id !== id);
+        saveCart();
         updateCartUI();
     }
 
     function showToast(msg) {
         const toast = document.getElementById("toast");
+        if(!toast) return;
         toast.innerText = msg;
         toast.style.display = "block";
-        setTimeout(() => toast.style.display = "none", 2000);
+        setTimeout(() => toast.style.display = "none", 3000);
     }
 
     // Cart sidebar
     const cartIcon = document.getElementById("cartIcon");
     const cartSidebar = document.getElementById("cartSidebar");
     const overlay = document.getElementById("overlay");
-    cartIcon.onclick = () => { cartSidebar.classList.add("open"); overlay.classList.add("show"); };
-    document.getElementById("closeCart").onclick = () => { cartSidebar.classList.remove("open"); overlay.classList.remove("show"); };
-    overlay.onclick = () => { cartSidebar.classList.remove("open"); overlay.classList.remove("show"); };
-    document.getElementById("checkoutBtn").onclick = () => {
+    const closeCart = document.getElementById("closeCart");
+    
+    if(cartIcon) cartIcon.onclick = () => { cartSidebar.classList.add("open"); overlay.classList.add("show"); };
+    if(closeCart) closeCart.onclick = () => { cartSidebar.classList.remove("open"); overlay.classList.remove("show"); };
+    if(overlay) overlay.onclick = () => { cartSidebar.classList.remove("open"); overlay.classList.remove("show"); };
+    
+    const checkoutBtn = document.getElementById("checkoutBtn");
+    if(checkoutBtn) checkoutBtn.onclick = () => {
         if(cart.length === 0) { showToast("Cart empty"); return; }
-        alert("✅ Order placed! GST invoice will be sent.");
+        alert("✅ Order placed! Our team will contact you for GST billing details.");
         cart = [];
+        saveCart();
         updateCartUI();
         cartSidebar.classList.remove("open");
         overlay.classList.remove("show");
     };
 
-    // Tabs
-    const tabs = document.querySelectorAll(".tab");
-    const shopSection = document.getElementById("shopSection");
-    const oppSection = document.getElementById("opportunitySection");
-    const navLinks = document.querySelectorAll(".nav-link");
-
+    // Tabs logic
     function switchTab(tabId) {
+        const tabs = document.querySelectorAll(".tab");
+        if(tabs.length === 0) return;
+        
         tabs.forEach(t => t.classList.remove("active"));
         const activeTab = document.querySelector(`.tab[data-tab="${tabId}"]`);
         if (activeTab) activeTab.classList.add("active");
         
-        if(tabId === "shop") {
-            shopSection.classList.add("active");
-            oppSection.classList.remove("active");
-        } else {
-            shopSection.classList.remove("active");
-            oppSection.classList.add("active");
+        const shop = document.getElementById("shopSection");
+        const opp = document.getElementById("opportunitySection");
+        
+        if(shop && opp) {
+            if(tabId === "shop") {
+                shop.classList.add("active");
+                opp.classList.remove("active");
+            } else {
+                shop.classList.remove("active");
+                opp.classList.add("active");
+            }
         }
     }
 
-    tabs.forEach(tab => {
+    document.querySelectorAll(".tab").forEach(tab => {
         tab.onclick = () => switchTab(tab.dataset.tab);
     });
-    navLinks.forEach(link => {
+
+    document.querySelectorAll(".nav-link[data-tab]").forEach(link => {
         link.onclick = (e) => {
             e.preventDefault();
             switchTab(link.dataset.tab);
+            const tabsEl = document.querySelector('.tabs');
+            if(tabsEl) window.scrollTo({ top: tabsEl.offsetTop - 100, behavior: 'smooth' });
         };
     });
 
-    document.getElementById("heroShopBtn").onclick = (e) => { e.preventDefault(); switchTab("shop"); };
-    document.getElementById("heroBizBtn").onclick = (e) => { e.preventDefault(); switchTab("opportunity"); };
-    document.getElementById("joinNowBtn").onclick = (e) => {
+    const heroShopBtn = document.getElementById("heroShopBtn");
+    if(heroShopBtn) heroShopBtn.onclick = (e) => { 
+        e.preventDefault(); 
+        switchTab("shop"); 
+        const tabsEl = document.querySelector('.tabs');
+        if(tabsEl) window.scrollTo({ top: tabsEl.offsetTop - 100, behavior: 'smooth' }); 
+    };
+    
+    const heroBizBtn = document.getElementById("heroBizBtn");
+    if(heroBizBtn) heroBizBtn.onclick = (e) => { 
+        e.preventDefault(); 
+        switchTab("opportunity"); 
+        const tabsEl = document.querySelector('.tabs');
+        if(tabsEl) window.scrollTo({ top: tabsEl.offsetTop - 100, behavior: 'smooth' }); 
+    };
+    
+    const joinNowBtn = document.getElementById("joinNowBtn");
+    if(joinNowBtn) joinNowBtn.onclick = (e) => {
         e.preventDefault();
-        alert("📞 Become a Distributor\nInvestment: ₹2,50,000 (Product Purchase)\nContact: 1800-XXX-XXXX");
+        alert("📞 Become a Distributor\nActivation: ₹2,50,000 (Product Purchase)\nContact Support for KYC.");
     };
 
-    renderProducts();
+    // Initialize UI
+    updateCartUI();
 </script>
 @endpush

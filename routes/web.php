@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +17,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Website Routes
-Route::get('/', function () {
-    return view('website.index');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/product/{id}', [HomeController::class, 'show'])->name('product.show');
+
+// Admin Panel Login Routes
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('/login', [AuthController::class, 'login'])->name('admin.login.submit');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
 });
 
-// Admin Panel Routes
-Route::prefix('admin')->group(function () {
+// Protected Admin Panel Routes
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
-    });
+    })->name('dashboard');
+
+    // Products CRUD
+    Route::resource('products', ProductController::class);
+    Route::delete('product-images/{image}', [ProductController::class, 'deleteImage'])->name('product-images.destroy');
+    Route::post('product-images/{image}/set-primary', [ProductController::class, 'setPrimaryImage'])->name('product-images.set-primary');
 });

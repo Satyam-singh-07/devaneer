@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="description" content="@yield('meta_description', 'EliteDirect — Premium wellness products.')">
-    <title>@yield('title', 'EliteDirect | Premium Wellness')</title>
+    <meta name="description" content="@yield('meta_description', 'Devaneer — Premium wellness products.')">
+    <title>@yield('title', 'Devaneer | Premium Wellness')</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="{{ asset('logo.jpeg') }}">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@300;400;500;600;700;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -21,5 +24,6 @@
     @include('partials.website.footer')
 
     @stack('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
