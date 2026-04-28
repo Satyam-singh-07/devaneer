@@ -11,7 +11,7 @@
                 <div>
                     <span class="hero-badge">✦ Product-Based Direct Selling ✦</span>
                     <h1>Earn from<br><span style="color: #06B6D4;">Real Sales</span><br>Not from Joining</h1>
-                    <p>❌ No ROI | ❌ No Binary | ❌ No Passive Income<br>✅ Only Product Sale = Your Earning</p>
+                    {{-- <p>❌ No ROI | ❌ No Binary | ❌ No Passive Income<br>✅ Only Product Sale = Your Earning</p> --}}
                     <div style="display: flex; gap: 16px; flex-wrap: wrap;">
                         <a href="#" class="btn-primary" id="heroShopBtn"><i class="fas fa-store"></i> Shop Products</a>
                         <a href="#" class="btn-outline" id="heroBizBtn"><i class="fas fa-chart-line"></i> View Plan</a>
