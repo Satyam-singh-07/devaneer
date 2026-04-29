@@ -9,7 +9,7 @@
         <div class="container">
             <div class="hero-grid">
                 <div>
-                    <span class="hero-badge">✦ Product-Based Direct Selling hello ✦</span>
+                    <span class="hero-badge">✦ Product-Based Direct Selling satyam ✦</span>
                     <h1>Earn from<br><span style="color: #06B6D4;">Real Sales</span><br>Not from Joining</h1>
                     {{-- <p>❌ No ROI | ❌ No Binary | ❌ No Passive Income<br>✅ Only Product Sale = Your Earning</p> --}}
                     <div style="display: flex; gap: 16px; flex-wrap: wrap;">
