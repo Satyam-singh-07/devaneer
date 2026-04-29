@@ -17,22 +17,18 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /var/www/app
+            cd /var/www/devaneer
 
-            TIMESTAMP=$(date +%Y%m%d%H%M%S)
-            NEW_RELEASE=releases/$TIMESTAMP
-
-            git clone https://github.com/Satyam-singh-07/devaneer.git $NEW_RELEASE
-            cd $NEW_RELEASE
+            git pull origin main
 
             composer install --no-dev --optimize-autoloader
 
-            ln -s /var/www/app/shared/.env .env
-            rm -rf storage
-            ln -s /var/www/app/shared/storage storage
-
             php artisan migrate --force
+
+            php artisan optimize:clear
             php artisan config:cache
             php artisan route:cache
+            php artisan view:cache
 
-            ln -sfn /var/www/app/$NEW_RELEASE /var/www/app/current
+            sudo chown -R www-data:www-data storage bootstrap/cache
+            sudo chmod -R 775 storage bootstrap/cache
