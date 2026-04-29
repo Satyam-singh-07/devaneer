@@ -1,0 +1,38 @@
+name: Deploy Laravel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /var/www/app
+
+            TIMESTAMP=$(date +%Y%m%d%H%M%S)
+            NEW_RELEASE=releases/$TIMESTAMP
+
+            git clone https://github.com/Satyam-singh-07/devaneer.git $NEW_RELEASE
+            cd $NEW_RELEASE
+
+            composer install --no-dev --optimize-autoloader
+
+            ln -s /var/www/app/shared/.env .env
+            rm -rf storage
+            ln -s /var/www/app/shared/storage storage
+
+            php artisan migrate --force
+            php artisan config:cache
+            php artisan route:cache
+
+            ln -sfn /var/www/app/$NEW_RELEASE /var/www/app/current
