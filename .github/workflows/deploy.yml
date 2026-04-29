@@ -21,11 +21,11 @@ jobs:
 
             git pull origin main
 
-            # FIX permissions BEFORE Laravel runs
-            sudo chown -R www-data:www-data storage bootstrap/cache
+            # FIX permissions properly (NOT www-data owner)
+            sudo chown -R ubuntu:www-data storage bootstrap/cache
             sudo chmod -R 775 storage bootstrap/cache
 
-            # Now safe to run composer
+            # run composer as ubuntu (correct)
             composer install --no-dev --optimize-autoloader
 
             php artisan migrate --force
