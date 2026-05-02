@@ -119,7 +119,6 @@
     .logo {
         display: flex;
         align-items: center;
-        gap: 10px;
         font-size: 28px;
         font-weight: 800;
         color: var(--primary);
@@ -128,6 +127,7 @@
 
     .logo img {
         height: 40px;
+        margin-right: 10px;
         border-radius: 8px;
         background: var(--highlight);
         border: 2px solid var(--primary);
