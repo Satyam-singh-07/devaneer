@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\MemberAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +21,21 @@ use App\Http\Controllers\HomeController;
 // Website Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product/{id}', [HomeController::class, 'show'])->name('product.show');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+
+// Member Auth Routes
+Route::get('/login', [MemberAuthController::class, 'showLoginForm'])->name('member.login');
+Route::post('/login/otp', [MemberAuthController::class, 'sendOtp'])->name('member.login.otp');
+Route::post('/login/verify', [MemberAuthController::class, 'verifyOtp'])->name('member.verify.otp');
+Route::post('/logout', [MemberAuthController::class, 'logout'])->name('member.logout');
+
+// Member Protected Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('member.dashboard');
+    })->name('member.dashboard');
+});
 
 // Admin Panel Login Routes
 Route::prefix('admin')->group(function () {
@@ -37,4 +54,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('products', ProductController::class);
     Route::delete('product-images/{image}', [ProductController::class, 'deleteImage'])->name('product-images.destroy');
     Route::post('product-images/{image}/set-primary', [ProductController::class, 'setPrimaryImage'])->name('product-images.set-primary');
+
+    // Members CRUD
+    Route::resource('members', \App\Http\Controllers\Admin\MemberController::class);
 });

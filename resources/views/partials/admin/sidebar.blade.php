@@ -17,8 +17,8 @@
                 </a>
             </li>
             <li class="nav-item mb-2">
-                <a href="#" class="nav-link text-white-50">
-                    <i class="bi bi-people me-2"></i> Distributors
+                <a href="{{ route('admin.members.index') }}" class="nav-link {{ request()->routeIs('admin.members.*') ? 'active' : '' }}">
+                    <i class="bi bi-people me-2"></i> Members
                 </a>
             </li>
             <li class="nav-item mb-2">

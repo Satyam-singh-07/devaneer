@@ -138,7 +138,7 @@
             </div>
 
             <div style="text-align: center; margin: 48px 0;">
-                <a href="#" class="btn-primary" id="joinNowBtn"><i class="fas fa-user-plus"></i> Become a Distributor</a>
+                <a href="{{ route('register') }}" class="btn-primary"><i class="fas fa-user-plus"></i> Become a Distributor</a>
             </div>
         </div>
     </div>

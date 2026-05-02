@@ -5,10 +5,14 @@
             DEVA<span>NEER</span>
         </a>
         <div class="nav-links">
-            <a href="#" class="nav-link" data-tab="shop">Shop</a>
-            <a href="#" class="nav-link" data-tab="opportunity">Opportunity</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+            <a href="{{ url('/') }}" class="nav-link" data-tab="shop">Shop</a>
+            <a href="{{ url('/') }}#opportunity" class="nav-link" data-tab="opportunity">Opportunity</a>
+            <a href="{{ route('register') }}" class="nav-link">Join Us</a>
+            @auth
+                <a href="{{ route('member.dashboard') }}" class="nav-link">Dashboard</a>
+            @else
+                <a href="{{ route('member.login') }}" class="nav-link">Login</a>
+            @endauth
         </div>
         <div class="nav-icons">
             <div class="cart-icon" id="cartIcon">
