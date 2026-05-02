@@ -44,6 +44,15 @@
                             </div>
                         </div>
 
+                        <div class="mb-3">
+                            <label for="password" class="form-label fw-bold">Set Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="form-text">Min 8 characters. Give this password to the member.</div>
+                        </div>
+
                         <hr class="my-4">
 
                         <div class="d-grid">
@@ -64,7 +73,7 @@
                         <li class="mb-2">Member ID will be auto-generated (e.g. DEV0002).</li>
                         <li class="mb-2">Admin (DEV0001) will be set as the sponsor.</li>
                         <li class="mb-2">Phone number must be a valid 10-digit Indian number.</li>
-                        <li class="mb-2">No password is required at this stage.</li>
+                        <li class="mb-2">Ensure the email and password are secure.</li>
                     </ul>
                 </div>
             </div>

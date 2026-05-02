@@ -9,7 +9,7 @@
             @auth
                 <a href="{{ route('member.dashboard') }}" class="nav-link">Dashboard</a>
             @else
-                <a href="{{ route('member.login') }}" class="nav-link">Login</a>
+                <a href="{{ route('login') }}" class="nav-link">Login</a>
             @endauth
         </div>
         <div class="nav-icons">

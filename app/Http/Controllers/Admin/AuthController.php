@@ -24,6 +24,8 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+        // dd($credentials);
+
             if (Auth::user()->is_admin) {
                 $request->session()->regenerate();
                 return redirect()->intended('admin/dashboard');

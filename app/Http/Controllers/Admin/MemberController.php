@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
@@ -39,6 +40,7 @@ class MemberController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'regex:/^[6789]\d{9}$/', 'unique:users,phone'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
 
         $user = User::create([
@@ -47,7 +49,7 @@ class MemberController extends Controller
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
-            'password' => null,
+            'password' => Hash::make($request->password),
             'is_admin' => false,
         ]);
 
@@ -72,13 +74,20 @@ class MemberController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'regex:/^[6789]\d{9}$/', 'unique:users,phone,' . $id],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $id],
+            'password' => ['nullable', 'string', 'min:8'],
         ]);
 
-        $member->update([
+        $data = [
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
-        ]);
+        ];
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $member->update($data);
 
         return redirect()->route('admin.members.index')->with('success', 'Member updated successfully.');
     }

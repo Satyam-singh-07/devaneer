@@ -13,7 +13,7 @@
                     <i class="bi bi-speedometer2 me-2"></i> Dashboard
                 </a>
             </li>
-            <li class="nav-item mb-2">
+            {{-- <li class="nav-item mb-2">
                 <a href="#" class="nav-link text-white-50">
                     <i class="bi bi-diagram-3 me-2"></i> My Genealogy
                 </a>
@@ -32,14 +32,14 @@
                 <a href="#" class="nav-link text-white-50">
                     <i class="bi bi-cart3 me-2"></i> My Orders
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item mt-4 border-top pt-3">
                 <a href="{{ url('/') }}" class="nav-link text-info">
                     <i class="bi bi-shop me-2"></i> Go to Shop
                 </a>
             </li>
             <li class="nav-item mt-2">
-                <form action="{{ route('member.logout') }}" method="POST" class="d-grid px-2">
+                <form action="{{ route('logout') }}" method="POST" class="d-grid px-2">
                     @csrf
                     <button type="submit" class="btn btn-outline-danger btn-sm text-start">
                         <i class="bi bi-box-arrow-right me-2"></i> Logout

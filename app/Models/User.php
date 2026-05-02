@@ -47,7 +47,22 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
         'otp_expires_at' => 'datetime',
     ];
+
+    /**
+     * Get the members referred by this user.
+     */
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'sponsor_id', 'username');
+    }
+
+    /**
+     * Get the sponsor of this user.
+     */
+    public function sponsor()
+    {
+        return $this->belongsTo(User::class, 'sponsor_id', 'username');
+    }
 }

@@ -57,6 +57,15 @@
                             </div>
                         </div>
 
+                        <div class="mb-3 border-top pt-3 mt-3">
+                            <label for="password" class="form-label fw-bold">Update Password</label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                            <div class="form-text text-info"><i class="bi bi-info-circle me-1"></i> Leave blank to keep current password.</div>
+                        </div>
+
                         <hr class="my-4">
 
                         <div class="d-grid">

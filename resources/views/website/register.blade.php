@@ -53,7 +53,7 @@
                     @enderror
                 </div>
 
-                <div style="margin-bottom: 30px;">
+                <div style="margin-bottom: 20px;">
                     <label for="email" style="display: block; font-weight: 600; margin-bottom: 8px; color: #0B1C2C;">Email Address <span style="color: #e63946;">*</span></label>
                     <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="Enter your email" 
                         style="width: 100%; padding: 12px; border: 1px solid #dee2e6; border-radius: 8px; font-size: 16px; outline: none; background: #f8fafc; color: #0B1C2C;"
@@ -63,6 +63,23 @@
                     @enderror
                 </div>
 
+                <div style="margin-bottom: 20px;">
+                    <label for="password" style="display: block; font-weight: 600; margin-bottom: 8px; color: #0B1C2C;">Create Password <span style="color: #e63946;">*</span></label>
+                    <input type="password" name="password" id="password" placeholder="Min 8 characters" 
+                        style="width: 100%; padding: 12px; border: 1px solid #dee2e6; border-radius: 8px; font-size: 16px; outline: none; background: #f8fafc; color: #0B1C2C;"
+                        required>
+                    @error('password')
+                        <div style="color: #e63946; font-size: 13px; margin-top: 5px;">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <label for="password_confirmation" style="display: block; font-weight: 600; margin-bottom: 8px; color: #0B1C2C;">Confirm Password <span style="color: #e63946;">*</span></label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Repeat your password" 
+                        style="width: 100%; padding: 12px; border: 1px solid #dee2e6; border-radius: 8px; font-size: 16px; outline: none; background: #f8fafc; color: #0B1C2C;"
+                        required>
+                </div>
+
                 <button type="submit" class="btn-primary" style="width: 100%; border: none; cursor: pointer; padding: 14px; font-size: 16px;">
                     <i class="fas fa-user-plus" style="margin-right: 8px;"></i> Register Now
                 </button>
@@ -70,8 +87,7 @@
         </div>
         
         <div style="text-align: center; margin-top: 30px;">
-            <p style="color: var(--text-muted); font-size: 14px;">By registering, you agree to our Terms & Conditions.</p>
-            <a href="{{ route('home') }}" style="color: var(--primary); text-decoration: none; font-weight: 600;">← Back to Home</a>
+            <p style="color: var(--text-muted); font-size: 14px;">Already a member? <a href="{{ route('login') }}" style="color: var(--primary); text-decoration: none; font-weight: 600;">Login here</a></p>
         </div>
     </div>
 </div>
@@ -93,6 +109,20 @@
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             alert('Please enter a valid email address.');
+            e.preventDefault();
+            return false;
+        }
+
+        const password = document.getElementById('password').value;
+        if (password.length < 8) {
+            alert('Password must be at least 8 characters long.');
+            e.preventDefault();
+            return false;
+        }
+
+        const confirm = document.getElementById('password_confirmation').value;
+        if (password !== confirm) {
+            alert('Passwords do not match.');
             e.preventDefault();
             return false;
         }

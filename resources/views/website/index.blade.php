@@ -17,7 +17,7 @@
                         @auth
                             <a href="{{ route('member.dashboard') }}" class="btn-outline"><i class="fas fa-th-large"></i> Dashboard</a>
                         @else
-                            <a href="{{ route('member.login') }}" class="btn-outline"><i class="fas fa-sign-in-alt"></i> Member Login</a>
+                            <a href="{{ route('login') }}" class="btn-outline"><i class="fas fa-sign-in-alt"></i> Member Login</a>
                         @endauth
                     </div>
                     <div class="hero-stats">
@@ -146,7 +146,7 @@
                 @auth
                     <a href="{{ route('member.dashboard') }}" class="btn-outline"><i class="fas fa-th-large"></i> Go to Dashboard</a>
                 @else
-                    <a href="{{ route('member.login') }}" class="btn-outline"><i class="fas fa-sign-in-alt"></i> Existing Member Login</a>
+                    <a href="{{ route('login') }}" class="btn-outline"><i class="fas fa-sign-in-alt"></i> Existing Member Login</a>
                 @endauth
             </div>
         </div>

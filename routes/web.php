@@ -25,10 +25,9 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register']);
 
 // Member Auth Routes
-Route::get('/login', [MemberAuthController::class, 'showLoginForm'])->name('member.login');
-Route::post('/login/otp', [MemberAuthController::class, 'sendOtp'])->name('member.login.otp');
-Route::post('/login/verify', [MemberAuthController::class, 'verifyOtp'])->name('member.verify.otp');
-Route::post('/logout', [MemberAuthController::class, 'logout'])->name('member.logout');
+Route::get('/login', [MemberAuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [MemberAuthController::class, 'login'])->name('login.submit');
+Route::post('/logout', [MemberAuthController::class, 'logout'])->name('logout');
 
 // Member Protected Routes
 Route::middleware(['auth'])->group(function () {
@@ -39,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
 
 // Admin Panel Login Routes
 Route::prefix('admin')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
     Route::post('/login', [AuthController::class, 'login'])->name('admin.login.submit');
     Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
 });
@@ -58,3 +57,4 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     // Members CRUD
     Route::resource('members', \App\Http\Controllers\Admin\MemberController::class);
 });
+
