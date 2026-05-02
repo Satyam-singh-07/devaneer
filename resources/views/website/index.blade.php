@@ -36,7 +36,7 @@
         <div style="text-align: center; margin: 40px 0 20px;">
             <div class="tabs">
                 <div class="tab active" data-tab="shop">🛍️ Shop Products</div>
-                <div class="tab" data-tab="opportunity">💼 Business Opportunity</div>
+                {{-- <div class="tab" data-tab="opportunity">💼 Business Opportunity</div> --}}
             </div>
         </div>
 
