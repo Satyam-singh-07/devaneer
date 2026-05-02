@@ -3,7 +3,7 @@
         <a href="{{ url('/') }}">
             <img src="{{ asset('logo.jpeg') }}" alt="Devaneer Logo" class="img-fluid rounded-3 mb-2" style="max-height: 80px;">
         </a>
-        <h5 class="mb-0 fw-bold text-white">Member Portal</h5>
+        <h5 class="mb-0 fw-bold text-white">DEVANEER</h5>
     </div>
     
     <div class="sidebar-content py-3">

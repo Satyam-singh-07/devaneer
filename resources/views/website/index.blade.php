@@ -14,7 +14,11 @@
                     {{-- <p>❌ No ROI | ❌ No Binary | ❌ No Passive Income<br>✅ Only Product Sale = Your Earning</p> --}}
                     <div style="display: flex; gap: 16px; flex-wrap: wrap;">
                         <a href="#" class="btn-primary" id="heroShopBtn"><i class="fas fa-store"></i> Shop Products</a>
-                        <a href="#" class="btn-outline" id="heroBizBtn"><i class="fas fa-chart-line"></i> View Plan</a>
+                        @auth
+                            <a href="{{ route('member.dashboard') }}" class="btn-outline"><i class="fas fa-th-large"></i> Dashboard</a>
+                        @else
+                            <a href="{{ route('member.login') }}" class="btn-outline"><i class="fas fa-sign-in-alt"></i> Member Login</a>
+                        @endauth
                     </div>
                     <div class="hero-stats">
                         <div class="stat"><div class="stat-number">20%</div><div style="font-size: 12px;">Retail Profit</div></div>
@@ -137,8 +141,13 @@
                 </div>
             </div>
 
-            <div style="text-align: center; margin: 48px 0;">
+            <div style="text-align: center; margin: 48px 0; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
                 <a href="{{ route('register') }}" class="btn-primary"><i class="fas fa-user-plus"></i> Become a Distributor</a>
+                @auth
+                    <a href="{{ route('member.dashboard') }}" class="btn-outline"><i class="fas fa-th-large"></i> Go to Dashboard</a>
+                @else
+                    <a href="{{ route('member.login') }}" class="btn-outline"><i class="fas fa-sign-in-alt"></i> Existing Member Login</a>
+                @endauth
             </div>
         </div>
     </div>
@@ -279,20 +288,6 @@
         if(tabsEl) window.scrollTo({ top: tabsEl.offsetTop - 100, behavior: 'smooth' }); 
     };
     
-    const heroBizBtn = document.getElementById("heroBizBtn");
-    if(heroBizBtn) heroBizBtn.onclick = (e) => { 
-        e.preventDefault(); 
-        switchTab("opportunity"); 
-        const tabsEl = document.querySelector('.tabs');
-        if(tabsEl) window.scrollTo({ top: tabsEl.offsetTop - 100, behavior: 'smooth' }); 
-    };
-    
-    const joinNowBtn = document.getElementById("joinNowBtn");
-    if(joinNowBtn) joinNowBtn.onclick = (e) => {
-        e.preventDefault();
-        alert("📞 Become a Distributor\nActivation: ₹2,50,000 (Product Purchase)\nContact Support for KYC.");
-    };
-
     // Initialize UI
     updateCartUI();
 </script>

@@ -23,8 +23,7 @@
 <footer class="footer">
     <div class="container">
         <div class="logo" style="justify-content: center; font-size: 32px; margin-bottom: 24px;">
-            <img src="{{ asset('logo.jpeg') }}" alt="Devaneer Logo">
-            DEVA<span>NEER</span>
+            <img src="{{ asset('logo.jpeg') }}" alt="Devaneer Logo">DEVA<span>NEER</span>
         </div>
         <p style="margin-bottom: 16px;">✅ Only Product Sale = Earning</p>
         <p style="font-size: 12px;">© {{ date('Y') }} Devaneer — Fully Legal | Product-Based Direct Selling | Zero Risk for Company</p>
