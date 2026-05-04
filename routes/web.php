@@ -56,5 +56,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 
     // Members CRUD
     Route::resource('members', \App\Http\Controllers\Admin\MemberController::class);
+
+    // Banners CRUD
+    Route::resource('banners', \App\Http\Controllers\Admin\BannerController::class);
 });
 

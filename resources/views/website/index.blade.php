@@ -5,32 +5,10 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" style="min-height: auto; padding: 60px 0; background: var(--bg-deep);">
         <div class="container">
-            <div class="hero-grid">
-                <div>
-                    <span class="hero-badge">✦ Product-Based Direct Selling ✦</span>
-                    <h1>Earn from<br><span style="color: #06B6D4;">Real Sales</span><br>Not from Joining</h1>
-                    {{-- <p>❌ No ROI | ❌ No Binary | ❌ No Passive Income<br>✅ Only Product Sale = Your Earning</p> --}}
-                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-                        <a href="#" class="btn-primary" id="heroShopBtn"><i class="fas fa-store"></i> Shop Products</a>
-                        @auth
-                            <a href="{{ route('member.dashboard') }}" class="btn-outline"><i class="fas fa-th-large"></i> Dashboard</a>
-                        @else
-                            <a href="{{ route('login') }}" class="btn-outline"><i class="fas fa-sign-in-alt"></i> Member Login</a>
-                        @endauth
-                    </div>
-                    <div class="hero-stats">
-                        <div class="stat"><div class="stat-number">20%</div><div style="font-size: 12px;">Retail Profit</div></div>
-                        <div class="stat"><div class="stat-number">≤50%</div><div style="font-size: 12px;">Total Payout</div></div>
-                        <div class="stat"><div class="stat-number">7</div><div style="font-size: 12px;">Levels Deep</div></div>
-                    </div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="background: radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 70%); padding: 40px;">
-                        <i class="fas fa-certificate" style="font-size: 120px; color: #06B6D4; opacity: 0.8;"></i>
-                    </div>
-                </div>
+            <div class="hero-banner">
+                <img src="{{ asset('banners/banner.jpeg') }}" alt="Devaneer Banner" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); display: block;">
             </div>
         </div>
     </section>
